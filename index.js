@@ -127,7 +127,7 @@ Translite.getTr = function (source, options={}) {
   let optionsExt = Object.assign({}, options, {
     source: source,
     context: hasProp('context') ? options['context'] : {},
-    language: hasProp('language') ? options['language'] : getLanguage(),
+    language: hasProp('language') ? options['language'] : Translite.getLanguage(),
     markBroken: hasProp('markBroken') ? options['markBroken'] : false,
   });
 
