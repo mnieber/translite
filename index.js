@@ -1,5 +1,3 @@
-import React from 'react'
-
 class Translator {
   constructor(options) {
     this.context = options.context;
