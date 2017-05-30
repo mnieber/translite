@@ -1,6 +1,6 @@
 {
   "name": "translite",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Small no-db translation library supporting controlled contexts, versioning and plural forms.",
   "main": "index.js",
   "directories": {

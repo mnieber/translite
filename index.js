@@ -1,3 +1,5 @@
+var Translite = {};
+
 class Translator {
   constructor(options) {
     this.context = options.context;
@@ -111,15 +113,15 @@ class Translator {
 
 let _language = 'en'
 
-export function getLanguage() {
+Translite.getLanguage = function () {
   return _language;
 }
 
-export function setLanguage(language) {
+Translite.setLanguage = function (language) {
   _language = language;
 }
 
-export function getTr(source, options={}) {
+Translite.getTr = function (source, options={}) {
   function hasProp(x) { return options.hasOwnProperty(x); }
 
   if (!source) {
@@ -136,3 +138,5 @@ export function getTr(source, options={}) {
   let translator = new Translator(optionsExt);
   return {tr: translator.translate, context: optionsExt['context']};
 }
+
+module.exports = Translite;
