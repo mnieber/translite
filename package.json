@@ -1,0 +1,27 @@
+{
+  "name": "translite",
+  "version": "1.0.1",
+  "description": "Small no-db translation library supporting controlled contexts, versioning and plural forms.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "webpack --config webpack-test.config && tape test-bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/%3Amnieber/translite.git"
+  },
+  "keywords": [
+    "translation",
+    "js",
+    "translate"
+  ],
+  "author": "Maarten Nieber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/%3Amnieber/translite/issues"
+  },
+  "homepage": "https://github.com/%3Amnieber/translite#readme"
+}
