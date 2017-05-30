@@ -58,15 +58,6 @@ class Translator {
     if (this._node(id, count, result)) {
       return result.node;
     }
-    else if (count == null) {
-      return this._error(id, count);
-    }
-
-    for (var count_alt = 2; count_alt >= 0; count_alt -= 1) {
-      if (this._node(id, count_alt, result)) {
-        return result.node;
-      }
-    }
 
     return this._error(id, count);
   }
