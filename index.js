@@ -13,9 +13,14 @@ class Translator {
       "many",
     ];
 
-    this.translate = this.translate.bind(this);
-    this._best_matching_node = this._best_matching_node.bind(this);
+    this._normalize_count = this._normalize_count.bind(this);
     this._id = this._id.bind(this);
+    this._node = this._node.bind(this);
+    this._error = this._error.bind(this);
+    this._best_matching_node = this._best_matching_node.bind(this);
+    this._eval_in_context = this._eval_in_context.bind(this);
+    this._translate = this._translate.bind(this);
+    this.translate = this.translate.bind(this);
   }
 
   _normalize_count(count) {
