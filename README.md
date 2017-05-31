@@ -4,14 +4,15 @@ Small no-db translation library for js, supporting controlled contexts, versioni
 ## Features
 
 Below we'll describe the features of this translation library. The example translations file at the bottom of this file helps to clarify how these features are used.
-Note that the input to the translation function is a string that we call the "identifier".  The output is the translation of the identifier into the selected language. My personal preference is to create identifiers by concatenating the first words of the english translation, e.g.
-"Welcome-to-this-webpage". Of course, you can also use regular english words and sentences as the identifier.
+The input to the translation function is a string that we call the "identifier".  The output is the translation of the identifier into the selected language. Note that the identifier itself is never used as a translation (in other words: if you target English as one of the output languages, you will write an English translation for each identifier).
+My personal preference is to create identifiers by concatenating the first words of the english translation, e.g.
+"Welcome-to-this-webpage". Of course, you can also use regular english words and sentences as the identifier, but the use of hyphens or underscores makes it clear that it's only used as an *input*.
 
 
 ### No database: all translations are grouped in javascript dictionaries
 
 The use of javascript files for storing the translations allows you to manage the translations and source code together in source control.
-Declaring multiple translation dictionaries in these javascript files makes it possible to group related translations, and to translate the same string differently in each group. Moreover, the context that is provided by the group helps to clarify the intention behind each translated string. In the following example, the `form` and `welcome` groups are used:
+Declaring multiple translation dictionaries in these javascript files makes it possible to group related translations, and to translate the same string differently in each group. This has the advantage that the context (provided by the group) helps to clarify the intention behind each translated string. In the following example, the `form` and `welcome` groups are used:
 
     ```javascript
     import { pages } from 'translations'
@@ -23,6 +24,10 @@ Declaring multiple translation dictionaries in these javascript files makes it p
     let {tr: tr2, context: context2} = getTr(group['welcome']);
     console.log(tr2('Good-morning'))
     ```
+
+### Translations are not split per language
+
+Each group (mentioned above) contains the translation of the identifier into all the target languages. This helps to ensure that all the translations carry the same meaning. In addition, having all the translations together makes it easier to find translations that are no longer up-to-date.
 
 ### Identifiers and their translations have a version number
 
