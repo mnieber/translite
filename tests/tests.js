@@ -1,5 +1,5 @@
 import test from 'tape'
-import { getTr, setLanguage, getLanguage } from 'translite'
+import { getTr, setLanguage, getLanguage } from '../index'
 
 
 let pages = {
