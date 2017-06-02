@@ -96,7 +96,7 @@ class Translator {
         return result.translation;
       }
     }
-    return '!' + this.language + '!';
+    return '!Unknown language: ' + this.language + '!';
   }
 }
 
