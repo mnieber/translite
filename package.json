@@ -1,13 +1,13 @@
 {
   "name": "translite",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Small no-db translation library supporting controlled contexts, versioning and plural forms.",
   "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "webpack --config webpack-test.config && tape test-bundle.js"
+    "test": "webpack --config ./tests/webpack.config && tape ./tests/test-bundle.js"
   },
   "repository": {
     "type": "git",
