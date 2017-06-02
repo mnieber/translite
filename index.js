@@ -78,9 +78,6 @@ class Translator {
       ? ("!" + result.translation + "!")
       : result.translation;
 
-    // todo count nr of undefineds...
-    result.hasUndefinedReference = result.translation.includes("undefined");
-
     return true;
   }
 
@@ -93,10 +90,6 @@ class Translator {
     for (var version = node.v; version >= 0; version -= 1) {
       var result = {};
       if (this._translate(node, version, result)) {
-        if (result.hasUndefinedReference) {
-          console.error("tr: undefined variable in '" + node[key] + "'");
-          return result.brokenTranslation;
-        }
         if (version < node.v) {
           return result.brokenTranslation;
         }

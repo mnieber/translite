@@ -74,15 +74,11 @@ test('Translate using context', function (t) {
   t.end();
 });
 
-// Note that in reality this case doesn't throw but produces an error in the console (not sure how to test that)
-test('Translate with missing context produces error', function (t) {
+test('Missing values in context are rendered as "undefined"', function (t) {
   setLanguage('en')
   let {tr: tr, context: context} = getTr(pages['welcome']);
-  t.throws(function() {
-    tr('Hi_user');
-  });
-
- t.end();
+  t.equal(tr('Hi_user'), 'Hi undefined!');
+  t.end();
 });
 
 
