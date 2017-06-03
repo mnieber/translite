@@ -50,7 +50,7 @@ let pages = {
 test('Translate identifier to english', function (t) {
   setLanguage('en')
   t.equal('en', getLanguage());
-  let {tr: tr, context: context} = getTr(pages['form']);
+  let {tr: tr} = getTr(pages['form']);
   t.equal(tr('This_field_is_required'), 'This field is required');
   t.end();
 });
@@ -60,7 +60,7 @@ test('Translate identifier to spanish', function (t) {
   setLanguage('es')
   t.equal('es', getLanguage());
 
- let {tr: tr, context: context} = getTr(pages['form']);
+  let {tr: tr} = getTr(pages['form']);
   t.equal(tr('This_field_is_required'), 'Este campo es obligatorio');
   t.end();
 });
@@ -74,9 +74,10 @@ test('Translate using context', function (t) {
   t.end();
 });
 
+
 test('Missing values in context are rendered as "undefined"', function (t) {
   setLanguage('en')
-  let {tr: tr, context: context} = getTr(pages['welcome']);
+  let {tr: tr} = getTr(pages['welcome']);
   t.equal(tr('Hi_user'), 'Hi undefined!');
   t.end();
 });
@@ -85,7 +86,7 @@ test('Missing values in context are rendered as "undefined"', function (t) {
 test('Mark outdated translation as broken', function (t) {
   setLanguage('es');
   let options = { markBroken: true };
-  let {tr: tr_es, context: context_es} = getTr(pages['form'], options);
+  let {tr: tr_es} = getTr(pages['form'], options);
   t.equal(
     tr_es('This_field_is_required'),
     '!Este campo es obligatorio!',
@@ -94,7 +95,7 @@ test('Mark outdated translation as broken', function (t) {
   );
 
  setLanguage('en');
-  let {tr: tr_en, context: context_en} = getTr(pages['form'], options);
+  let {tr: tr_en} = getTr(pages['form'], options);
   t.equal(
     tr_en('This_field_is_required'),
     'This field is required',
@@ -107,7 +108,7 @@ test('Mark outdated translation as broken', function (t) {
 
 test('Translate to unknown language', function (t) {
   setLanguage('xx')
-  let {tr: tr, context: context} = getTr(pages['form']);
+  let {tr: tr} = getTr(pages['form']);
   t.equal(tr('This_field_is_required'), '!Unknown language: xx!');
   t.end();
 });
@@ -115,7 +116,7 @@ test('Translate to unknown language', function (t) {
 
 test('Existing tr function is unaffected by setLanguage', function (t) {
   setLanguage('en')
-  let {tr: tr, context: context} = getTr(pages['form']);
+  let {tr: tr} = getTr(pages['form']);
   setLanguage('es')
   t.equal(tr('This_field_is_required'), 'This field is required');
   t.end();
@@ -124,7 +125,7 @@ test('Existing tr function is unaffected by setLanguage', function (t) {
 
 test('Translate to plural form', function (t) {
   setLanguage('en')
-  let {tr: tr, context: context} = getTr(pages['form']);
+  let {tr: tr} = getTr(pages['form']);
   t.equal(tr('button', 0), 'no buttons');
   t.equal(tr('button', 1), 'one button');
   t.equal(tr('button', 2), 'two or more buttons');
