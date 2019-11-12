@@ -3,26 +3,14 @@ var webpack = require('webpack');
 
 
 const test = {
-  entry: './tests.js',
+  entry: './tests/tests.js',
 
   target: 'node',
-
-  module: {
-    loaders: [
-      {
-        test: /.js?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['babel-preset-es2015', 'babel-preset-react', 'es2015'],
-        }
-      }
-    ]
-  },
+  mode: 'development',
 
   output: {
       path: path.resolve('.'),
-      filename: "test-bundle.js",
+      filename: "tests/test-bundle.js",
   },
 
   plugins: [

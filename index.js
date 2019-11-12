@@ -75,7 +75,7 @@ class Translator {
 
     result.translation = this._eval_in_context(node[key]);
     result.brokenTranslation = this.markBroken
-      ? ("!" + result.translation + "!")
+      ? this.markBroken(result.translation)
       : result.translation;
 
     return true;

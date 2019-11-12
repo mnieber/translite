@@ -1,6 +1,6 @@
 {
   "name": "translite",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Small no-db translation library supporting controlled contexts, versioning and plural forms.",
   "main": "index.js",
   "directories": {
@@ -23,5 +23,18 @@
   "bugs": {
     "url": "https://github.com/mnieber/translite/issues"
   },
-  "homepage": "https://github.com/mnieber/translite#readme"
+  "homepage": "https://github.com/mnieber/translite#readme",
+  "dependencies": {
+    "package.json": "^2.0.1"
+  },
+  "devDependencies": {
+    "extend-tape": "^1.2.0",
+    "sinon": "^7.2.2",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.2",
+    "tape-run": "^5.0.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7",
+    "webpack-tape-run": "^0.0.7"
+  }
 }

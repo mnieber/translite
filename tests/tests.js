@@ -85,11 +85,11 @@ test('Missing values in context are rendered as "undefined"', function (t) {
 
 test('Mark outdated translation as broken', function (t) {
   setLanguage('es');
-  let options = { markBroken: true };
+  let options = { markBroken: function(x) { return "??" + x + "??"} };
   let {tr: tr_es} = getTr(pages['form'], options);
   t.equal(
     tr_es('This_field_is_required'),
-    '!Este campo es obligatorio!',
+    '??Este campo es obligatorio??',
     'Since the spanish translation lacks behind the latest ' +
     'version it should be marked as broken.'
   );
@@ -100,7 +100,7 @@ test('Mark outdated translation as broken', function (t) {
     tr_en('This_field_is_required'),
     'This field is required',
     'Since the english translation does not lack behind the latest ' +
-    'version it should be marked as broken.'
+    'version it should not be marked as broken.'
   );
   t.end();
 });
