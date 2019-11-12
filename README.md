@@ -99,8 +99,7 @@ console.log(tr('button', 5); // 'two or more buttons'
 
 ## Features
 
-Below we'll describe the features of this translation library. The examples in the synopsishelp to clarify how these features are used.
-The input to the translation function is a string that we call the "identifier".  The output is the translation of the identifier into the selected language. In other words: if you target English as one of the output languages, you will write an English translation for each identifier. Note that the identifier itself is never used as a translation.
+Below we'll describe the features of this translation library. The examples in the synopsis help to clarify how these features are used. The input to the translation function is a string that we call the "identifier". The output is the translation of the identifier into the selected language. In other words: if you target English as one of the output languages, then you will write an English translation for each identifier. Note that the identifier itself is never used as a translation.
 My personal preference is to create identifiers by concatenating the first words of the english translation, e.g.
 "Welcome-to-this-webpage". Of course, you can also use regular english words and sentences as the identifier, but the use of hyphens or underscores makes it clear that it's only used as an *input*.
 
