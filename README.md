@@ -170,6 +170,7 @@ If you supply a `markBroken` function in the options, then this function will be
     console.log(tr('This-field-is-required'))
     ```
 
+Note: for legacy reasons, it's also supported to set `markBroken: true` in the options. In this case, broken translations will be shown as `!<translated>!`.
 
 ### Translations can have plural forms (zero, one, many)
 
