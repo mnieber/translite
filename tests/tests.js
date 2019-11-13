@@ -106,6 +106,32 @@ test('Mark outdated translation as broken', function (t) {
 });
 
 
+test('Use markbroken = true to mark outdated translation as broken', function (t) {
+  setLanguage('es');
+  let {tr: tr_es} = getTr(pages['form'], { markBroken: true });
+  t.equal(
+    tr_es('This_field_is_required'),
+    '!Este campo es obligatorio!',
+    'Since the spanish translation lacks behind the latest ' +
+    'version it should be marked as broken.'
+  );
+
+  let {tr: tr_es_broken_false} = getTr(pages['form'], { markBroken: false });
+  t.equal(
+    tr_es_broken_false('This_field_is_required'),
+    'Este campo es obligatorio'
+  );
+
+  // support legacy
+  let {tr: tr_es_broken_3} = getTr(pages['form'], { markBroken: 3 });
+  t.equal(
+    tr_es_broken_3('This_field_is_required'),
+    '!Este campo es obligatorio!'
+  );
+  t.end();
+});
+
+
 test('Translate to unknown language', function (t) {
   setLanguage('xx')
   let {tr: tr} = getTr(pages['form']);

@@ -74,8 +74,13 @@ class Translator {
     }
 
     result.translation = this._eval_in_context(node[key]);
-    result.brokenTranslation = this.markBroken
+    result.brokenTranslation =
+      this.markBroken && this.markBroken === true
+      ? ('!' + result.translation + '!')
+      : this.markBroken && (typeof this.markBroken === "function")
       ? this.markBroken(result.translation)
+      : !!this.markBroken
+      ? ('!' + result.translation + '!')
       : result.translation;
 
     return true;
