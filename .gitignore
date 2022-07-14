@@ -1,1 +1,2 @@
-tests/test-bundle.js
+dist
+node_modules
