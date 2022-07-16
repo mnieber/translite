@@ -7,14 +7,12 @@ export function translateToArray(strings: any, ...values: any) {
 
   while (iString < strings.length || iValue < values.length) {
     if (iString < strings.length) {
-      const s = strings[iString];
-      result.push(s.replaceAll(' ', '\u00A0'));
+      result.push(strings[iString]);
       iString++;
     }
 
     if (iValue < values.length) {
-      const s = values[iValue];
-      result.push(typeof s === 'string' ? s.replaceAll(' ', '\u00A0') : s);
+      result.push(values[iValue]);
       iValue++;
     }
   }
@@ -28,17 +26,11 @@ const renderTemplate = function (templateString, templateVars, prefix) {
 };
 
 class Translator {
-  context: any;
-  source: any;
-  language: string;
-  markBroken: any;
+  options: any;
   countString: string[] = ['zero', 'one', 'many'];
 
   constructor(options) {
-    this.context = options.context;
-    this.source = options.source;
-    this.language = options.language;
-    this.markBroken = options.markBroken;
+    this.options = options;
   }
 
   _normalize_count = (count) => {
@@ -57,10 +49,10 @@ class Translator {
 
   _node = (id, count, result) => {
     var id = this._id(id, count);
-    if (!this.source.hasOwnProperty(id)) {
+    if (!this.options.source.hasOwnProperty(id)) {
       return false;
     }
-    result.node = this.source[id];
+    result.node = this.options.source[id];
     return true;
   };
 
@@ -81,18 +73,23 @@ class Translator {
   };
 
   _translate = (node, version, prefix, result) => {
-    let key = this.language + '_' + version;
+    let key = (this.options.language ?? getLanguage()) + '_' + version;
     if (!node.hasOwnProperty(key)) {
       return false;
     }
 
-    result.translation = renderTemplate(node[key], this.context, prefix);
+    result.translation = renderTemplate(
+      node[key],
+      this.options.context,
+      prefix
+    );
     result.brokenTranslation =
-      this.markBroken && this.markBroken === true
+      this.options.markBroken && this.options.markBroken === true
         ? '!' + result.translation + '!'
-        : this.markBroken && typeof this.markBroken === 'function'
-        ? this.markBroken(result.translation)
-        : !!this.markBroken
+        : this.options.markBroken &&
+          typeof this.options.markBroken === 'function'
+        ? this.options.markBroken(result.translation)
+        : !!this.options.markBroken
         ? '!' + result.translation + '!'
         : result.translation;
 
@@ -102,7 +99,12 @@ class Translator {
   translate =
     (prefix) =>
     (id, count = null) => {
-      let node = this._best_matching_node(id, count);
+      const firstChar = id.charAt(0);
+      const firstCharLower = firstChar.toLowerCase();
+      const isUpperCased = firstChar !== firstCharLower;
+      const normalizedId = isUpperCased ? firstCharLower + id.slice(1) : id;
+
+      let node = this._best_matching_node(normalizedId, count);
       if (!node) {
         return '';
       }
@@ -113,10 +115,15 @@ class Translator {
           if (version < node.v) {
             return (result as any).brokenTranslation;
           }
-          return (result as any).translation;
+          const translation = (result as any).translation;
+          return isUpperCased
+            ? translation.charAt(0).toUpperCase() + translation.slice(1)
+            : translation;
         }
       }
-      return '!Unknown language: ' + this.language + '!';
+      return (
+        '!Unknown language: ' + (this.options.language ?? getLanguage()) + '!'
+      );
     };
 }
 
@@ -139,10 +146,24 @@ export function getTr(source, options = {}) {
     console.error('getTr: empty translation source');
   }
 
+  if (Array.isArray(source)) {
+    const sources = source;
+    source = {};
+    for (const x of sources) {
+      if (process.env.NODE_ENV === 'development') {
+        for (const k of Object.keys(x)) {
+          if (source.hasOwnProperty(k)) {
+            console.error('getTr: duplicate key ' + k);
+          }
+        }
+      }
+      Object.assign(source, x);
+    }
+  }
+
   let optionsExt = Object.assign({}, options, {
     source: source,
     context: hasProp('context') ? options['context'] : {},
-    language: hasProp('language') ? options['language'] : getLanguage(),
     markBroken: hasProp('markBroken') ? options['markBroken'] : false,
   });
 
