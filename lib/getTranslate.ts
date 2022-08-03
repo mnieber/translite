@@ -2,7 +2,7 @@ import { Translator } from './Translator';
 
 export function getTranslate(source, options: any = {}) {
   if (!source) {
-    console.error('getTr: empty translation source');
+    console.error('getTranslate: empty translation source');
   }
 
   if (Array.isArray(source)) {
@@ -12,7 +12,7 @@ export function getTranslate(source, options: any = {}) {
       if (process.env.NODE_ENV === 'development') {
         for (const k of Object.keys(x)) {
           if (source.hasOwnProperty(k)) {
-            console.error('getTr: duplicate key ' + k);
+            console.error('getTranslate: duplicate key ' + k);
           }
         }
       }
