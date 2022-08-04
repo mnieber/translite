@@ -1,6 +1,6 @@
 # translite
 
-Small no-db translation library for js, supporting controlled contexts, versioning and plural forms.
+Small no-db translation library for js, supporting controlled contexts and versioning.
 
 ## Synopsis
 
@@ -40,34 +40,34 @@ let pages = {
 // Translate identifier to english
 setLanguage('en');
 let { tr: tr } = getTr(pages['form']);
-console.log(tr('This_field_is_required')); // "This field is required"
+console.log(tr('This-field-is-required')); // "This field is required"
 
 // Translate identifier to spanish
 setLanguage('es');
 let { tr: tr } = getTr(pages['form']);
-console.log(tr('This_field_is_required')); // "Este campo es obligatorio"
+console.log(tr('This-field-is-required')); // "Este campo es obligatorio"
 
 // Translate using context
 setLanguage('en');
 let { tr: tr, context: context } = getTr(pages['welcome']);
 context['userName'] = 'Maximilia';
-console.log(tr('Hi_user')); // "Hi Maximilia!"
+console.log(tr('Hi-user')); // "Hi Maximilia!"
 
 // Pass in a context
 setLanguage('en');
 let { tr: tr, context: context } = getTr(pages['welcome'], {
   context: { userName: 'Juan' },
 });
-console.log(tr('Hi_user')); // "Hi Juan!"
+console.log(tr('Hi-user')); // "Hi Juan!"
 
 // Mark outdated translation as broken
 setLanguage('es');
-let { tr: tr_es } = getTr(pages['form'], {
+let { tr: trEs } = getTr(pages['form'], {
   markBroken: function (x) {
     return '??' + x + '??';
   },
 });
-console.log(tr_es('This_field_is_required')); // "??Este campo es obligatorio??"
+console.log(trEs('This-field-is-required')); // "??Este campo es obligatorio??"
 ```
 
 ## Features
