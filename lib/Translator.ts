@@ -4,11 +4,11 @@ export class Translator {
   options: any;
 
   constructor(options) {
-    this.options = options;
+    this.options = { ...options, language: options.language ?? getLanguage() };
   }
 
   _translate = (node, version, result) => {
-    let key = (this.options.language ?? getLanguage()) + '_' + version;
+    let key = this.options.language + '_' + version;
     if (!node.hasOwnProperty(key)) {
       return false;
     }
@@ -42,8 +42,6 @@ export class Translator {
           : (result as any).translation;
       }
     }
-    return (
-      '!Unknown language: ' + (this.options.language ?? getLanguage()) + '!'
-    );
+    return '!Unknown language: ' + this.options.language + '!';
   };
 }
