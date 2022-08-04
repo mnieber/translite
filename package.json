@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "webpack --config ./tests/webpack.config && tape ./tests/test-bundle.js"
+    "test": "npx ts-node-script node_modules/.bin/tape tests/tests.js"
   },
   "repository": {
     "type": "git",
@@ -28,13 +28,9 @@
     "package.json": "^2.0.1"
   },
   "devDependencies": {
-    "extend-tape": "^1.2.0",
-    "sinon": "^7.2.2",
     "tap-spec": "^5.0.0",
     "tape": "^4.9.2",
-    "tape-run": "^5.0.0",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7",
-    "webpack-tape-run": "^0.0.7"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
   }
 }
