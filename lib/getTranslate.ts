@@ -1,4 +1,5 @@
 import { Translator } from './Translator';
+import { options as transliteOptions } from './options';
 
 export function getTranslate(source, options: any = {}) {
   if (!source) {
@@ -9,7 +10,7 @@ export function getTranslate(source, options: any = {}) {
     const sources = source;
     source = {};
     for (const x of sources) {
-      if (process.env.NODE_ENV === 'development') {
+      if (transliteOptions.checkDuplicateKeys) {
         for (const k of Object.keys(x)) {
           if (source.hasOwnProperty(k)) {
             console.error('getTranslate: duplicate key ' + k);
