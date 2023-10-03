@@ -21,6 +21,25 @@ export function translateToArray(strings: any, ...values: any) {
   return result;
 }
 
+export function concatStringsAndValues(strings: any, ...values: any) {
+  let result: string = '';
+  let iString = 0;
+  let iValue = 0;
+
+  while (iString < strings.length || iValue < values.length) {
+    if (iString < strings.length) {
+      result += strings[iString];
+      iString++;
+    }
+
+    if (iValue < values.length) {
+      result += values[iValue];
+      iValue++;
+    }
+  }
+  return result;
+}
+
 export function executeTemplate(
   tagFunction: Function,
   template: string,
@@ -51,13 +70,9 @@ export function executeTemplate(
 export const getTrWithContext = (
   context: any,
   tr: Function,
-  tagFunction?: Function
+  tagFunction: Function
 ) => {
-  // @ts-ignore
-  const c = context;
-  return tagFunction
-    ? (id: string) => executeTemplate(tagFunction, tr(id), context)
-    : (id: string) => eval('`' + tr(id) + '`');
+  return (id: string) => executeTemplate(tagFunction, tr(id), context);
 };
 
 export const getTr = (source: any, options: any) => {
@@ -65,7 +80,7 @@ export const getTr = (source: any, options: any) => {
   const translate = getTranslate(source, options);
   return {
     context,
-    tr: getTrWithContext(context, translate),
+    tr: getTrWithContext(context, translate, concatStringsAndValues),
     tra: getTrWithContext(context, translate, translateToArray),
   };
 };
