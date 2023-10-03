@@ -125,3 +125,11 @@ test('Existing tr function is unaffected by setLanguage', function (t) {
   t.equal(tr('This-field-is-required'), 'This field is required');
   t.end();
 });
+
+test('Translate using context with tra', function (t) {
+  setLanguage('en');
+  let { tra, context } = getTr(pages['welcome']);
+  context['userName'] = 'Maximilia';
+  t.deepEqual(tra('Hi-user'), ['Hi ', 'Maximilia', '!']);
+  t.end();
+});
